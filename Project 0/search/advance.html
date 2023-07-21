@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Search</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="adv-navbar">
+        <div class="nav-logo">
+            <img src="images/google.png" alt="google">
+        </div>
+        <ul>
+            <li class="navlink"><a href="index.html">Google Search</a></li>
+        </ul>
+    </nav>
+    <h3>Advanced Search</h3>
+    <hr>
+    <main id="adv-main">
+        <h4>Find pages with...</h4>
+        <form id="adv-form" action="https://www.google.com/search" autocomplete="off" method="get">
+            <div class="adv-form-group">
+                <label for="all">all these words:</label>
+                <input type="text" name="as_q" id="all">
+                <p class="info">Type the important words: tri-colour rat terrier</p>
+            </div>
+            <div class="adv-form-group">
+                <label for="exact">this exact word or phrase:</label>
+                <input type="text" name="as_epq" id="exact">
+                <p class="info">Put exact words in quotes: "rat terrier"</p>
+            </div>
+            <div class="adv-form-group">
+                <label for="any">any of these words:</label>
+                <input type="text" name="as_oq" id="any">
+                <p class="info">Type OR between all the words you want: miniature OR standard</p>
+            </div>
+            <div class="adv-form-group">
+                <label for="none">none of these words:</label>
+                <input type="text" name="as_eq" id="none">
+                <p class="info">Put a minus sign just before words that you don't want: -rodent, -"Jack Russell"</p>
+            </div>
+            <div class="form-group form-group-btn">
+                <input id="adv-btn" class="btn" type="submit" value="Advanced Search">
+            </div>
+        </form>
+    </main>
+    <footer id="adv-footer">
+        <p>
+            Project by <a href="https://cs50.harvard.edu/web/2020/" target="_blank">CS50w</a>.
+            Coded by <span>Tegyalwar Himanshu</span>
+        </p>
+    </footer>
+</body>
+
+</html>
