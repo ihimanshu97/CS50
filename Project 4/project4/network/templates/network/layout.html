@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="author" content="Himanshu Tegyalwar">
+	<title>Network | {% block title %}{% endblock %}</title>
+	<link rel="shortcut icon" href="{% static 'network/logo.svg' %}" type="image/x-icon">
+	<!-- Poppins -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+		rel="stylesheet">
+
+	<!-- Bootstrap 5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+		integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+	<link href="{% static 'network/styles.css' %}" rel="stylesheet">
+</head>
+
+<body class="container-fluid">
+	<div class="row">
+		<nav class="col-lg-2 col-md-3 col-12 p-0 bg-primary-clr d-none d-md-flex flex-md-column">
+			<h2 class="m-4"><a class="text-accent" href="{% url 'index' %}">Network</a></h2>
+
+			<div>
+				<ul class="navbar-nav mx-4">
+					<li class="nav-item">
+						<a class="nav-link fs-5" href="{% url 'index' %}">All Posts</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link fs-5" href="{% url 'following' %}">Following</a>
+					</li>
+					<li class="nav-item d-lg-none">
+						<a class="nav-link fs-5" href="{% url 'newpost' %}">New Post</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link fs-5" href="{% url 'logout' %}">Log Out</a>
+					</li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link fs-5" href="{% url 'login' %}">Log In</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link fs-5" href="{% url 'register' %}">Register</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+
+			<div class="mt-auto px-4 py-3 border-top">
+				{% if user.is_authenticated %}
+				<a class="text-accent-dark fs-5" href="{% url 'profile' user %}">
+					<img class="profile-img rounded-circle" src="{{ user.profile.image }}" alt="{{ user }}"
+						style="height: 40px;"> <strong>{{ user }}</strong>
+				</a>
+				{% else %}
+				<a class="text-accent-dark fs-5" href="{% url 'login' %}">
+					<i class="far fa-user-circle"></i> <strong>Guest</strong>
+				</a>
+				{% endif %}
+			</div>
+		</nav>
+
+		<nav class="bg-primary-clr sticky-top shadow-sm d-flex d-md-none align-items-center gap-3 px-4 py-3">
+			<h2 class="m-0"><a class="text-accent" href="{% url 'index' %}">Network</a></h2>
+			<div class="ms-auto">
+				{% if user.is_authenticated %}
+				<a class="text-accent-dark fs-5" href="{% url 'profile' user %}">
+					<img class="profile-img rounded-circle" src="{{ user.profile.image }}" alt="{{ user }}"
+						style="height: 30px;"> <strong class="fw-medium">{{ user }}</strong>
+				</a>
+				{% else %}
+				<a class="text-accent-dark fs-5" href="{% url 'login' %}">
+					<i class="far fa-user-circle"></i> <strong class="fw-medium">Guest</strong>
+				</a>
+				{% endif %}
+			</div>
+			<div class="dropdown">
+				<button class="btn p-0 text-accent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fas fa-bars fa-lg"></i>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="{% url 'index' %}">All Posts</a></li>
+					{% if user.is_authenticated %}
+					<li><a class="dropdown-item" href="{% url 'following' %}">Following</a></li>
+					<li><a class="dropdown-item" href="{% url 'newpost' %}">New Post</a></li>
+					<li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+					{% else %}
+					<li><a class="dropdown-item" href="{% url 'login' %}">Log In</a></li>
+					<li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+
+		<main class="col-lg-7 col-md-9 col-12 p-0 bg-secondary-clr">
+			{% block body %}
+			{% endblock %}
+		</main>
+
+		<aside class="col-lg-3 d-lg-block d-none p-3 bg-primary-clr">
+			<h3 class="text-primary-emphasis">New Post</h3>
+			<form class="mt-3" action="{% url 'newpost' %}" method="post">
+				{% csrf_token %}
+				<div class="form-floating">
+					<textarea class="form-control" name="content" id="content" style="height: 60vh;"
+						placeholder="New post" required></textarea>
+					<label for="content">New post</label>
+				</div>
+				<div class="col-12 mt-4">
+					<button type="submit" class="btn btn-accent w-100">Share Post</button>
+				</div>
+			</form>
+		</aside>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+
+	<script src="{% static 'network/script.js' %}"></script>
+</body>
+
+</html>
