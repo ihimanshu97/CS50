@@ -1,0 +1,82 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Auctions: {{ listing.title }}{% endblock %}
+
+{% block body %}
+    <section id="listing">
+        <div class="image">
+            <img src="{{ listing.image }}" alt="{{ listing.title }}">
+        </div>
+        <div id="info">
+            <div id="basic">
+                <h2>{{ listing.title }}</h2>
+                <ul>
+                    <li>Listed by: <b>{{ listing.creater }}</b></li>
+                    <li>Listed on: {{ listing.date_created }}</li>
+                    <li>Category: {{ listing.category }}</li>
+                    <li>Description: {{ listing.description }}</li>
+                </ul>
+                <p>
+                    {% if not listing.winner %}
+                        <span class="price-label">Price: </span><span class="price">${{ listing.current_price }}</span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="watchlist">
+                <form action="{% url 'edit_watchlist' listing.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="
+                        {% if added %}
+                        Remove from Watchlist
+                        {% else %}
+                        Add to Watchlist
+                        {% endif %}
+                    ">
+                </form>
+            </div>
+            {% if not listing.winner %}
+                <div class="actions">
+                    {% if not creater %}
+                        <h4>New Bid</h4>
+                        <form action="{% url 'bid' listing.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="bid" required min="{{ min_bid }}">
+                            <input type="submit" value="Place Bid">
+                        </form>
+                    {% else %}
+                        <form action="{% url 'close' listing.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Close Auction">
+                        </form>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h3 class="alert-heading">AUCTION CLOSED</h3>
+                    <p><strong>WINNER: {{listing.winner}}</strong></p>
+                    <hr>
+                    <p class="mb-0">Winning Bid :<strong>{{ listing.current_price }}</strong></p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <section>
+        <div id="new-comment">
+            <h4>Add New Comment</h4>
+            <form action="{% url 'comment' listing.id %}" method="post">
+                {% csrf_token %}
+                {{ commentform.comment }}
+                <input type="submit" value="Add Comment">
+            </form>
+        </div>
+        <div id="comments">
+            <h3>Comments</h3>
+            <hr>
+            {% for comment in comments %}
+                <p><span>{{ comment.user }}</span> <span>on {{ comment.date_commented }}</span></p>
+                <p>{{ comment.comment }}</p>
+                <hr>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
