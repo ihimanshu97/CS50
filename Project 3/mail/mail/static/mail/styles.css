@@ -1,0 +1,93 @@
+* {
+    letter-spacing: .5px;
+}
+
+textarea {
+    min-height: 200px !important;
+}
+
+.form-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container > form {
+    width: min(400px, 90%);
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.form-container input[type='submit'] {
+    margin-top: .75rem;
+    padding: .5rem;
+}
+
+.form-container p {
+    text-align: center;
+}
+
+.navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.navbar-brand {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-brand img {
+    width: 30px;
+    aspect-ratio: 1 / 1;
+}
+
+.navbar-brand h3 {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+}
+
+.navbar nav {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar button {
+    background: transparent;
+    border: none;
+}
+
+main {
+    padding: 1rem;
+}
+
+#compose-form {
+    width: min(720px, 90%);
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+tr {
+    background: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.unread {
+    background: transparent;
+    font-weight: bold;
+}
+
+pre {
+    font-family: inherit;
+    white-space: pre-wrap;
+}
