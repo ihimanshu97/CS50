@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ error }}
+{% endblock %}
+
+{% block body %}
+    <div class="parent">
+        <div class="alert alert-warning" role="alert">
+            <h2 class="alert-heading">SORRY</h2>
+            <hr>
+            <p class="mb-0">{{ message | safe | escape }}</p>
+        </div>
+    </div>
+{% endblock %}

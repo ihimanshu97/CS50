@@ -1,0 +1,19 @@
+#form {
+    display: flex;
+}
+
+#form form {
+    width: 80%;
+    margin: auto;
+}
+
+.parent {
+    height: 80%;
+    display: flex;
+}
+
+div[class="alert alert-warning"] {
+    text-align: center;
+    width: 75%;
+    margin: auto;
+}

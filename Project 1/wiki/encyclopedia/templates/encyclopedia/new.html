@@ -1,0 +1,26 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+    New Entry
+{% endblock %}
+
+{% block body %}
+    <h1>New Entry</h1>
+    <hr>
+
+    <div id="form">
+        <form action="{% url 'new' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="title" type="text" class="form-control" id="title" placeholder="Title" autocomplete="off" required>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea name="content" class="form-control" id="content" rows="7" required></textarea>
+            </div>
+            <input type="submit" value="Add Entry" class="btn btn-primary">
+        </form>
+    </div>
+    
+{% endblock %}
